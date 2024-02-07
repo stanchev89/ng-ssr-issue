@@ -1,15 +1,12 @@
-import { Component, inject } from '@angular/core'
-import { PostStore } from '../../+store/post.store'
-import { JsonPipe } from '@angular/common'
-import { RouterLink } from '@angular/router'
+import { Component } from '@angular/core'
+
 
 @Component({
   selector: 'app-post-list',
   standalone: true,
-  imports: [JsonPipe, RouterLink],
+  imports: [],
   templateUrl: './post-list.component.html'
 })
 export class PostListComponent {
-  readonly postStore = inject(PostStore)
-  hideList = false
+
 }

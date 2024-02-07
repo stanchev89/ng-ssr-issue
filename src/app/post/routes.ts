@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router'
 
-export const postRoutes: Routes = [
+const postRoutes: Routes = [
   {
     path: '',
     loadComponent: () =>
@@ -17,3 +17,5 @@ export const postRoutes: Routes = [
       ),
   },
 ];
+
+export default postRoutes;

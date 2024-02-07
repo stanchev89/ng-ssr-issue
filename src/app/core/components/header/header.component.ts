@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core'
-import { TestStore } from '../../../+store/test/test.store'
+import { Component } from '@angular/core'
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -12,9 +11,4 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  readonly testStore = inject(TestStore)
-
-  increment(): void {
-    this.testStore.increment()
-  }
 }

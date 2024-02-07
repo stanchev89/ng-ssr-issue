@@ -1,18 +1,12 @@
-import { Component, inject, OnInit } from '@angular/core'
-import { PostStore } from '../../+store/post.store'
-import { JsonPipe } from '@angular/common'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-post-entity',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [],
   templateUrl: './post-entity.component.html',
   styleUrl: './post-entity.component.scss',
 })
-export class PostEntityComponent implements OnInit {
-  readonly postStore = inject(PostStore)
+export class PostEntityComponent  {
 
-  ngOnInit() {
-    console.log('I am rendered')
-  }
 }

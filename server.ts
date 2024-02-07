@@ -4,10 +4,7 @@ import express from 'express';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
-import { TransferState } from '@angular/core';
-import { TRANSFER_STATE_KEY } from './src/app/app.initializer';
-
-let counter = 0;
+import { REQUEST } from './src/app/ssr-tokens';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -35,22 +32,16 @@ export function app(): express.Express {
   // All regular routes use the Angular engine
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
-
-    const transferState = new TransferState();
-    transferState.set(TRANSFER_STATE_KEY, { message: 'Success!' });
-
-    console.log('BEFORE SERVER RENDER!', ++counter);
     commonEngine
       .render({
         bootstrap,
         documentFilePath: indexHtml,
         url: `${protocol}://${headers.host}${originalUrl}`,
         publicPath: browserDistFolder,
-        providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
+        providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }, { provide: REQUEST, useValue: req, multi: true }],
       })
       .then((html) => res.send(html))
       .catch((err) => {
-        console.log('CATCH SCOPE --- RENDER');
         return next(err);
       });
   });
